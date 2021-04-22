@@ -44,25 +44,26 @@ var result = ""; // Result which is filled only if someone achive winning score
 var universityImg = new Image();
 universityImg.src = './images/university.png';
 
-
-
-var bookImg = new Image();
-bookImg.src = './images/book.png';
-
-var bacteriaImg = new Image();
-bacteriaImg.src = './images/bacteria.png';
-
-var covidImg = new Image();
-covidImg.src = './images/covid.png';
-
 var laptopImg = new Image();
 laptopImg.src = './images/laptop.png';
 
 var timeImg = new Image();
 timeImg.src = './images/time.png';
 
+var bookImg = new Image();
+bookImg.src = './images/book.png';
+
+var universityHidden = [true,true,true,true];
+
+
 var familyImg = new Image();
 familyImg.src = './images/family.png';
+
+var bacteriaImg = new Image();
+bacteriaImg.src = './images/bacteria.png';
+
+var covidImg = new Image();
+covidImg.src = './images/covid.png';
 
 var loveImg = new Image();
 loveImg.src = './images/love.png';
@@ -72,6 +73,8 @@ moneyImg.src = './images/money.png';
 
 var sandwichImg = new Image();
 sandwichImg.src = './images/sandwich.png';
+
+var lifeHidden = [true,true,true,true,true,true];
 
 var faceBallImg = new Image();
 faceBallImg.src = './images/face.png';
@@ -93,7 +96,7 @@ const AI = {
         diff = 5;
     }
 
-    let randomOffset = Math.random(0.7,1);
+    let randomOffset = Math.random(0.8,1);
     this.y += diff * randomOffset;
 
 		if (this.y < 0) {
@@ -198,22 +201,22 @@ function drawBackground(){
 	context.fillStyle = "#FFFFFF";
 	context.fillRect(canvas.width/2,0,canvas.width/2, canvas.height);
 	//BASE IMGS
-	context.drawImage(universityImg, 0, canvas.height-canvas.height/3, canvas.width/3, canvas.height/3);
-	context.drawImage(familyImg, canvas.width-canvas.width/4, canvas.height-canvas.height/3, canvas.width/4, canvas.height/3);
+	if(!universityHidden[0])context.drawImage(universityImg, 0, canvas.height-canvas.height/3, canvas.width/3, canvas.height/3);
+	if(!lifeHidden[0])context.drawImage(familyImg, canvas.width-canvas.width/4, canvas.height-canvas.height/3, canvas.width/4, canvas.height/3);
 
 	//ADDITIONAL IMGS
 
 	//University
-	context.drawImage(laptopImg, canvas.width/4, canvas.height/2, canvas.width/6, canvas.height/4);
-	context.drawImage(bookImg, canvas.width/12, canvas.height/4, canvas.width/6, canvas.height/2.5);
-	context.drawImage(timeImg, canvas.width/4, canvas.height/8, canvas.width/10, canvas.height/8);
+	if(!universityHidden[1])context.drawImage(laptopImg, canvas.width/4, canvas.height/2, canvas.width/6, canvas.height/4);
+	if(!universityHidden[2])context.drawImage(bookImg, canvas.width/12, canvas.height/4, canvas.width/6, canvas.height/2.5);
+	if(!universityHidden[3])context.drawImage(timeImg, canvas.width/4, canvas.height/8, canvas.width/10, canvas.height/8);
 
 	//Life
-	context.drawImage(bacteriaImg, canvas.width-canvas.width/4, canvas.height/6, canvas.width/6, canvas.height/4);
-	context.drawImage(loveImg, canvas.width-canvas.width/2.2, canvas.height/4, canvas.width/12, canvas.height/8);
-	context.drawImage(moneyImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/4, canvas.width/12, canvas.height/8);
-	context.drawImage(sandwichImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/2, canvas.width/6, canvas.height/6);
-	context.drawImage(covidImg, canvas.width-canvas.width/2.5, canvas.height/8, canvas.width/8, canvas.height/10);
+	if(!lifeHidden[1])context.drawImage(bacteriaImg, canvas.width-canvas.width/4, canvas.height/6, canvas.width/6, canvas.height/4);
+	if(!lifeHidden[2])context.drawImage(loveImg, canvas.width-canvas.width/2.2, canvas.height/4, canvas.width/12, canvas.height/8);
+	if(!lifeHidden[3])context.drawImage(moneyImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/4, canvas.width/12, canvas.height/8);
+	if(!lifeHidden[4])context.drawImage(sandwichImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/2, canvas.width/6, canvas.height/6);
+	if(!lifeHidden[5])context.drawImage(covidImg, canvas.width-canvas.width/2.5, canvas.height/8, canvas.width/8, canvas.height/10);
 
 
 }
@@ -241,6 +244,8 @@ function input(e){
 				document.getElementById('userScore').innerHTML = player.points;
 				stressLevel = 50;
 				stressLevelSystem();
+				for(i = 0; i < universityHidden.length; i++) universityHidden[i] = true;
+				for(i = 0; i < lifeHidden.length; i++) lifeHidden[i] = true;
 				result = "";
 			}
 			document.getElementById('gameInfo').style.color = 'rgba(0,0,0,0)';
@@ -261,6 +266,8 @@ function input(e){
 				document.getElementById('userScore').innerHTML = player.points;
 				stressLevel = 50;
 				stressLevelSystem();
+				for(i = 0; i < universityHidden.length; i++) universityHidden[i] = true;
+				for(i = 0; i < lifeHidden.length; i++) lifeHidden[i] = true;
 				result = "";
 			}
 			document.getElementById('gameInfo').style.color = 'rgba(0,0,0,0)';
@@ -285,7 +292,8 @@ function inputrelease(e){
 // Ball collision
 function ballCollision(){
 	//With up or down border
-	if(ball.y< 0 || ball.y + ball.r > canvas.height) ball.yvel *= -1;
+	if(ball.y< 0) ball.yvel = Math.abs(ball.yvel);
+	if(ball.y + ball.r > canvas.height) ball.yvel = Math.abs(ball.yvel)*(-1);
 
 	//Ball with left border
 	if(ball.x <= 0)
@@ -317,12 +325,12 @@ function ballCollision(){
       if(ball.yvel < -4)
       {
         ball.yvel = -4;
-        if(diff < 0) ball.yvel -= diff * canvas.height/10000*2;
+        if(diff < 0) ball.yvel -= diff * canvas.height/10000*4;
       }
       else if(ball.yvel > 4)
       {
         ball.yvel = 4;
-        if(diff > 0) ball.yvel -= diff * canvas.height/10000*2;
+        if(diff > 0) ball.yvel -= diff * canvas.height/10000*4;
       }
       else
       {
@@ -330,6 +338,22 @@ function ballCollision(){
       }
 		  ball.xvel = Math.abs(ball.xvel);
 
+			let bl = false;
+
+			universityHidden.forEach((x) => {
+				if(x) bl = true;
+			});
+
+
+			if(bl)
+			{
+				let rnd = Math.floor(Math.random() * universityHidden.length);
+				while(!universityHidden[rnd])
+				{
+					rnd = Math.floor(Math.random() * universityHidden.length);
+				}
+				universityHidden[rnd] = false;
+			}
 
 		}
 		if(ball.x > canvas.width/2 && ball.y+ball.r > player.y && ball.y < player.y + PLAYER_HEIGHT)
@@ -352,6 +376,22 @@ function ballCollision(){
         ball.yvel -= diff * canvas.height/10000*2;
       }
 			ball.xvel = Math.abs(ball.xvel)*(-1);
+
+			let bl = false;
+
+			lifeHidden.forEach((x) => {
+				if(x) bl = true;
+			});
+
+			if(bl)
+			{
+				let rnd = Math.floor(Math.random() * lifeHidden.length);
+				while(!lifeHidden[rnd])
+				{
+					rnd = Math.floor(Math.random() * lifeHidden.length);
+				}
+				lifeHidden[rnd] = false;
+			}
 		}
 	}
 
@@ -359,10 +399,9 @@ function ballCollision(){
 
 // Updating ball position
 function ballMovement(){
-	ball.xvel = ball.xvel < 0 ? -stressLevel/10 -2: stressLevel/10 +2;
+	ball.xvel = ball.xvel < 0 ? -stressLevel/10 -5: stressLevel/10 +5;
 	ball.x += ball.xvel;
 	ball.y += ball.yvel;
-
 }
 
 // Handling score
@@ -451,6 +490,8 @@ function render() {
 			document.getElementById('universityActivity').style.opacity = 0;
 			if(result != "")
 			{
+				for(i = 0; i < universityHidden.length; i++) universityHidden[i] = false;
+				for(i = 0; i < lifeHidden.length; i++) lifeHidden[i] = false;
 				drawResult(); //Drawing result , who won
 			}
 		}
