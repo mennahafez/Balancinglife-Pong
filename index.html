@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Interface PONG</title>
+
+    <style>
+    @font-face {
+      font-family: 'arcade';
+      src: url('fonts/joystix.monospace.ttf');
+    }
+
+      body {
+        font-family: 'arcade';
+        background-image: url('images/htmlbg.jpg');
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        height: 100vh;
+        margin: auto;
+        background: #FFF;
+      }
+
+      .activities{
+        display: flex;
+        width: 60vw;
+        align-items: stretch;
+        flex-direction: row;
+        justify-content: space-around;
+        background: rgb(255,255,255);
+      }
+
+      .labels{
+        display: flex;
+        width: 60vw;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .score{
+        display: flex;
+        width: 60vw;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+      h1{
+        font-size: 2.2vw;
+        text-align: center;
+      }
+      h2{
+        font-size: 1.2vw;
+      }
+      h3{
+        font-size: 0.8vw;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .score span{
+        font-size: 1vw;
+      }
+
+    </style>
+</head>
+<body onresize="resizeCanvas()" bgcolor="salmon">
+
+  <div class="container">
+    <h1>Balancing Life</h1>
+    <div class="activities">
+      <h3 id="universityActivity" style="opacity: 0; color: red;">X</h3>
+      <h3 id="lifeActivity" style="opacity: 0; color: green;">X</h3>
+    </div>
+    <div class="labels">
+      <h2>⬛ Student Life</h2>
+      <h2>Stress level: <span id="stressValue">50%</span></h2>
+      <h2>⬜ Personal Life</h2>
+    </div>
+    <canvas id="canvas" width="1200" height="600"></canvas>
+    <div class="score">
+      <h1 id="computerScore">0</h1>
+      <span id="gameInfo">Info</span>
+      <h1 id="userScore">0</h1>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
