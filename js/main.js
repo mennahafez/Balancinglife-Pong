@@ -12,13 +12,13 @@ stressLevelSystem();
 //Activities
 const lifeActivities = [
 	{text: "Exercising", value: 5},
-	{text: "Driving a car", value: 8},
-	{text: "Cooking", value: 10},
-	{text: "Meditating", value: 20},
+	{text: "Driving a car", value: 7},
+	{text: "Cooking", value: 8},
+	{text: "Meditating", value: 18},
 	{text: "Working at the food shop", value: 14},
-	{text: "Making music", value: 30},
-	{text: "Meeting friends", value: 35},
-	{text: "Eating dinner with the family", value: 6}
+	{text: "Making music", value: 11},
+	{text: "Meeting friends", value: 16},
+	{text: "Eating dinner with the family", value: 4}
 ];
 
 const universityActivities = [
