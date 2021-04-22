@@ -22,7 +22,7 @@ function Sound(src) {
   }
 }
 
-var hitSound = new Sound('sounds/pop.ogg');
+var hitSound = new Sound('sounds/pop.mp3');
 
 
 // Stress VARIABLES
