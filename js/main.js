@@ -4,6 +4,27 @@ var context = canvas.getContext('2d'); // Loading 2d context
 canvas.width = window.innerWidth*0.6;
 canvas.height = window.innerHeight*0.6;
 
+
+// SOUNDS
+function Sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.volume = 0.5;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+var hitSound = new Sound('sounds/pop.ogg');
+
+
 // Stress VARIABLES
 var stressLevel = 50;
 var stressHtml = document.getElementById('stressValue');
@@ -319,6 +340,7 @@ function ballCollision(){
 	{
 		if(ball.x < canvas.width/2 && ball.y+ball.r > AI.y && ball.y < AI.y + PLAYER_HEIGHT)
 		{
+			hitSound.play();
 			activitySystem('university');
 			stressLevelSystem(); //Handling stress level
 			let diff = (AI.y+PLAYER_HEIGHT/2) - (ball.y+ball.r);
@@ -358,6 +380,7 @@ function ballCollision(){
 		}
 		if(ball.x > canvas.width/2 && ball.y+ball.r > player.y && ball.y < player.y + PLAYER_HEIGHT)
 		{
+			hitSound.play();
 			activitySystem('life');
 			stressLevelSystem(); //Handling stress level
 			let diff = (player.y+PLAYER_HEIGHT/2) - ball.y;
