@@ -9,7 +9,6 @@ canvas.height = window.innerHeight*0.6;
 function Sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
-  this.sound.volume = 0.5;
   this.sound.setAttribute("preload", "auto");
   this.sound.setAttribute("controls", "none");
   this.sound.style.display = "none";
@@ -23,6 +22,8 @@ function Sound(src) {
 }
 
 var hitSound = new Sound('sounds/pop.mp3');
+var winningSound = new Sound('sounds/applause.wav');
+var losingSound = new Sound('sounds/booing.wav');
 
 
 // Stress VARIABLES
@@ -208,8 +209,8 @@ function drawResult(){
 	context.fillStyle = "green";
 	context.strokeStyle = "green";
 
-	if(result == "-->"){context.textAlign = "start"; stressLevel = 0; stressLevelSystem();}
-	else if(result == "<--"){context.textAlign = "end"; stressLevel = 100; stressLevelSystem();}
+	if(result == "-->"){context.textAlign = "start"; stressLevel = 0; stressLevelSystem(); winningSound.play(); setTimeout(() => {result = '';},2000);}
+	else if(result == "<--"){context.textAlign = "end"; stressLevel = 100; stressLevelSystem(); losingSound.play(); setTimeout(() => {result = '';},2000);}
 	else context.textAlign = "center";
 
 	context.strokeText(result, canvas.width/2, canvas.height/4+100);
@@ -365,7 +366,6 @@ function ballCollision(){
 			universityHidden.forEach((x) => {
 				if(x) bl = true;
 			});
-
 
 			if(bl)
 			{
