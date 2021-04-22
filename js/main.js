@@ -197,8 +197,23 @@ function drawBackground(){
 	context.fillRect(0,0,canvas.width/2, canvas.height);
 	context.fillStyle = "#FFFFFF";
 	context.fillRect(canvas.width/2,0,canvas.width/2, canvas.height);
+	//BASE IMGS
 	context.drawImage(universityImg, 0, canvas.height-canvas.height/3, canvas.width/3, canvas.height/3);
 	context.drawImage(familyImg, canvas.width-canvas.width/4, canvas.height-canvas.height/3, canvas.width/4, canvas.height/3);
+
+	//ADDITIONAL IMGS
+
+	//University
+	context.drawImage(laptopImg, canvas.width/4, canvas.height/2, canvas.width/6, canvas.height/4);
+	context.drawImage(bookImg, canvas.width/12, canvas.height/4, canvas.width/6, canvas.height/2.5);
+	context.drawImage(timeImg, canvas.width/4, canvas.height/8, canvas.width/10, canvas.height/8);
+
+	//Life
+	context.drawImage(bacteriaImg, canvas.width-canvas.width/4, canvas.height/6, canvas.width/6, canvas.height/4);
+	context.drawImage(loveImg, canvas.width-canvas.width/2.2, canvas.height/4, canvas.width/12, canvas.height/8);
+	context.drawImage(moneyImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/4, canvas.width/12, canvas.height/8);
+	context.drawImage(sandwichImg, canvas.width-canvas.width/2.5, canvas.height-canvas.height/2, canvas.width/6, canvas.height/6);
+	context.drawImage(covidImg, canvas.width-canvas.width/2.5, canvas.height/8, canvas.width/8, canvas.height/10);
 
 
 }
